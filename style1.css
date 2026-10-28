@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,body{
+    height: 100%;
+    width: 100%;
+}
+html{
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+body{
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@property --rotate{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+@property --line{
+    syntax: "<color>";
+    initial-value: rgb(30, 30, 30);
+    inherits: false;
+}
+@property --tail{
+    syntax: "<color>";
+    initial-value: rgb(30, 30, 30);
+    inherits: false;
+}
+
+@keyframes borderAnimate{
+    from{ --rotate: 0deg; }
+    to{ --rotate: 360deg; }
+}
+
+.box{
+    max-width: 300px;
+    padding: 10px;
+    overflow: hidden;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 15px;
+    border: 3px solid transparent;
+    background:
+        linear-gradient(black, black) padding-box,
+        conic-gradient(
+            from var(--rotate),
+            rgb(30, 30, 30) 0%,
+            rgb(30, 30, 30) 60%,
+            var(--tail) 85%,
+            var(--line) 100%
+        ) border-box;
+    animation: borderAnimate 4s linear infinite;   
+    box-shadow: 0 0 0 rgba(255, 0, 195, 0);
+    transition: --line 0.4s linear, --tail 0.4s linear,
+                box-shadow 0.3s linear, color 0.3s linear, text-shadow 0.3s linear;
+}
+
+.box:hover{
+    --line: white;                   
+    --tail: rgb(255, 0, 123);        
+    box-shadow: 0 0 50px rgb(255, 0, 195);
+    color: rgb(243, 139, 189);
+    text-shadow: 0 0 10px rgb(255, 0, 123);
+}
+
+.box img{
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+}
